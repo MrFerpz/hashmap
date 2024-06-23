@@ -65,9 +65,27 @@ class HashMap {
         console.log(count);
         return count
     }
+
+    clear() {
+        this.buckets.splice(0, this.buckets.length);
+        this.buckets = new Array(16);
+    }
+
+    keys() {
+        let keys = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                keys.push(this.buckets[i].key)
+            }
+        }
+        console.log(keys);
+        return keys;
+    }
 }
 
 let hashMap = new HashMap;
 hashMap.set("Carlos", "Sainz");
 hashMap.set("Green", "Mamba");
 hashMap.length();
+console.log(hashMap);
+hashMap.keys();
