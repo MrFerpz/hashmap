@@ -6,8 +6,8 @@ class HashMap {
     constructor(size = 16) {
         this.buckets = new Array(size)
         this.load = 0;
+        this.size = size;
     }
-
 
     // so this method takes in the key and returns a hash value corresponding to which bucket I guess
     hash(key) {
@@ -30,15 +30,18 @@ class HashMap {
 
         // tracking the load
         this.load++;
-
-        // overload handler
-        if (this.load >= 0.8*this.size) {
-            this.size*2;
+        if (this.load >= 0.8 * this.size) {
+            console.log(this.buckets);
             let oldBuckets = this.buckets;
-            this.buckets = new Array(size);
-            for (let i = 0; i <= oldBuckets.length; i++) {
-                oldBuckets[i] = this.buckets[i];
+            console.log(oldBuckets);
+            this.size *= 2;
+            this.buckets = new Array(this.size);
+            for (let i = 0; i < oldBuckets.length; i++) {
+                if (oldBuckets[i]) {
+                    this.buckets[i] = oldBuckets[i]
+                }
             }
+            console.log(this.buckets)
         }
     }
 
@@ -125,13 +128,18 @@ class HashMap {
     }
 }
 
-let hashMap = new HashMap;
-hashMap.set("Carlos", "Sainz");
-hashMap.set("Green", "Mamba");
-hashMap.set("Huge", "Chungus");
-hashMap.set("Huge", "Chungo");
-hashMap.length();
-console.log(hashMap);
-hashMap.keys();
-hashMap.values();
-hashMap.entries();
+let test = new HashMap;
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+test.set('donkey', 'magenta')
+console.log(test);
