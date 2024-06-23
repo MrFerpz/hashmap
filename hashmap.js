@@ -81,6 +81,29 @@ class HashMap {
         console.log(keys);
         return keys;
     }
+
+    values() {
+        let values = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                values.push(this.buckets[i].value)
+            }
+        }
+        console.log(values);
+        return values;
+    }
+
+    entries() {
+        let entries = [];
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                let newEntry = `${this.buckets[i].key}, ${this.buckets[i].value}`;
+                entries.push(newEntry);
+            }
+        }
+        console.log(entries);
+        return entries;
+    }
 }
 
 let hashMap = new HashMap;
@@ -89,3 +112,5 @@ hashMap.set("Green", "Mamba");
 hashMap.length();
 console.log(hashMap);
 hashMap.keys();
+hashMap.values();
+hashMap.entries();
