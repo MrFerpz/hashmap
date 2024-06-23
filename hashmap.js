@@ -3,7 +3,11 @@
 //   }
 
 class HashMap {
+    constructor(size = 16) {
+        this.buckets = new Array(size)
+    }
 
+    // so this method takes in the key and returns a hash value corresponding to which bucket I guess
     hash(key) {
         
         let hashCode = 0;
@@ -13,6 +17,27 @@ class HashMap {
           hashCode = primeNumber * hashCode + key.charCodeAt(i);
         }
      
-        return hashCode;
+        return hashCode % this.buckets.length;
       } 
-}
+
+    set(key, value) {
+        this.buckets[this.hash(key)] = {key, value};
+    }
+
+    get(key) {
+        // maybe have to refactor this after we allow for collisions
+        let i = 0;
+        while (i < this.buckets.length) {
+            if (this.buckets[i]) {
+                if (this.buckets[i].key === key)
+                return this.buckets[i].value;
+            }
+            i++
+        }
+}}
+
+let hashMap = new HashMap;
+hashMap.set("Carlos", "Sainz");
+hashMap.set("Green", "Mamba");
+console.log(hashMap.get("Green"));
+console.log(hashMap.buckets[3].key);
