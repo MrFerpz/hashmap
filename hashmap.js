@@ -33,11 +33,16 @@ class HashMap {
                 return this.buckets[i].value;
             }
             i++
+        }}
+    
+    has(key) {
+        if (this.get(key) !== undefined) {
+            return true;
         }
-}}
+        else return false;
+    }
+}
 
 let hashMap = new HashMap;
 hashMap.set("Carlos", "Sainz");
 hashMap.set("Green", "Mamba");
-console.log(hashMap.get("Green"));
-console.log(hashMap.buckets[3].key);
