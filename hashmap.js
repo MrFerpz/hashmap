@@ -5,7 +5,9 @@
 class HashMap {
     constructor(size = 16) {
         this.buckets = new Array(size)
+        this.load = 0;
     }
+
 
     // so this method takes in the key and returns a hash value corresponding to which bucket I guess
     hash(key) {
@@ -21,6 +23,19 @@ class HashMap {
 
     set(key, value) {
         this.buckets[this.hash(key)] = {key, value};
+
+        // tracking the load
+        this.load++;
+
+        // overload handler
+        if (this.load >= 0.8*this.size) {
+            this.size*2;
+            let oldBuckets = this.buckets;
+            this.buckets = new Array(size);
+            for (let i = 0; i <= oldBuckets.length; i++) {
+                oldBuckets[i] = this.buckets[i];
+            }
+        }
     }
 
     get(key) {
@@ -68,7 +83,7 @@ class HashMap {
 
     clear() {
         this.buckets.splice(0, this.buckets.length);
-        this.buckets = new Array(16);
+        this.buckets = new Array(this.size);
     }
 
     keys() {
@@ -109,6 +124,7 @@ class HashMap {
 let hashMap = new HashMap;
 hashMap.set("Carlos", "Sainz");
 hashMap.set("Green", "Mamba");
+hashMap.set("Huge", "Chungus");
 hashMap.length();
 console.log(hashMap);
 hashMap.keys();
