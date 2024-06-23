@@ -9,7 +9,6 @@ class HashMap {
 
     // so this method takes in the key and returns a hash value corresponding to which bucket I guess
     hash(key) {
-        
         let hashCode = 0;
            
         const primeNumber = 31;
@@ -41,8 +40,34 @@ class HashMap {
         }
         else return false;
     }
+
+    remove(key) {
+        let i = 0;
+        while (i < this.buckets.length) {
+            if (this.buckets[i]) {
+                if (this.buckets[i].key === key) {
+                    this.buckets[i].key = "";
+                    this.buckets[i].value = "";
+                    return true
+                    }
+                    i++;
+                 }
+                } return false
+            } 
+
+    length() {
+        let count = 0;
+        for (let i = 0; i <= this.buckets.length; i++) {
+            if (this.buckets[i]) {
+                count += 1;
+            }
+        }
+        console.log(count);
+        return count
+    }
 }
 
 let hashMap = new HashMap;
 hashMap.set("Carlos", "Sainz");
 hashMap.set("Green", "Mamba");
+hashMap.length();
