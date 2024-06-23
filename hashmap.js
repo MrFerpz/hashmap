@@ -21,8 +21,12 @@ class HashMap {
         return hashCode % this.buckets.length;
       } 
 
-    set(key, value) {
-        this.buckets[this.hash(key)] = {key, value};
+    set(key, value, nextNode = null) {
+        if (this.buckets[this.hash(key)] === undefined) {
+            this.buckets[this.hash(key)] = {key, value};
+        } else {
+            this.buckets[this.hash(key)].nextNode = {key, value};
+        }
 
         // tracking the load
         this.load++;
@@ -125,6 +129,7 @@ let hashMap = new HashMap;
 hashMap.set("Carlos", "Sainz");
 hashMap.set("Green", "Mamba");
 hashMap.set("Huge", "Chungus");
+hashMap.set("Huge", "Chungo");
 hashMap.length();
 console.log(hashMap);
 hashMap.keys();
