@@ -4,7 +4,7 @@
 
 class HashMap {
     constructor(size = 16) {
-        this.buckets = new Array(size)
+        this.buckets = new Array(size).fill(null).map(() => []);
         this.load = 0;
         this.size = size;
     }
@@ -22,13 +22,14 @@ class HashMap {
       } 
 
     set(key, value, nextNode = null) {
+
         if (this.buckets[this.hash(key)] === undefined) {
-            this.buckets[this.hash(key)] = {key, value};
+            this.buckets[this.hash(key)] = [{key, value}];
         } else {
-            this.buckets[this.hash(key)].nextNode = {key, value};
+            this.buckets[this.hash(key)].push({key, value});
         }
 
-        // tracking the load
+        // tracking the load and expanding buckets when it gets big
         this.load++;
         if (this.load >= 0.8 * this.size) {
             console.log(this.buckets);
@@ -142,4 +143,15 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 test.set('donkey', 'magenta')
+test.set('monkey', 'brown');
+test.set('notebook', 'blue');
+test.set('orange', 'orange');
+test.set('pencil', 'yellow');
+test.set('queen', 'purple');
+test.set('robot', 'silver');
+test.set('snake', 'green');
+test.set('tree', 'green');
+test.set('umbrella', 'red');
+test.set('violin', 'brown');
+
 console.log(test);
