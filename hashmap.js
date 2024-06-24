@@ -23,9 +23,11 @@ class HashMap {
 
     set(key, value, nextNode = null) {
 
+        // checks if bucket is empty
         if (this.buckets[this.hash(key)] === undefined) {
             this.buckets[this.hash(key)] = [{key, value}];
         } else {
+        // otherwise adds to existing bucket
             this.buckets[this.hash(key)].push({key, value});
         }
 
